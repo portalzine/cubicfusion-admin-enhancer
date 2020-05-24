@@ -2,13 +2,14 @@
 **cubicFUSION Admin Enhancer** is a free administration toolbox for WordPress. The plugin is still work in progress.
 The integrated addons are used to centralise things I love & need when sending out a finished website or project. I am sure they can help others as well.  
   
-[cubicFUSION Admin Enhancer - Website][1]
-[cubicFUSION Admin Enhancer - WordPress Respository][2]
+[cubicFUSION Admin Enhancer - Website][1]  
+[cubicFUSION Admin Enhancer - WordPress Respository][2]  
+[Alex @ portalZINE NMN - Development meets Creativity][3]
 
 ## General Features
 
 * Centralize useful admin tweaks & enhancements.
-* **Shortcodes**: The first addition to the toolbox is Shortcodes. All dashboard widgets are converted to simple shortcodes. You can use those shortcodes within Elementor Pro or any other page builder that allows you to create custom admin dashboards. This makes it easy to build white-label dashboards, while still reusing all those nice dashboard widgets :) Works perfectly with [Dashboard  Welcome for Elementor]()(https://wordpress.org/plugins/dashboard-welcome-for-elementor/) or [Dashboard Welcome for Beaver Builder][4]
+* **Shortcodes**: The first addition to the toolbox is Shortcodes. All dashboard widgets are converted to simple shortcodes. You can use those shortcodes within Elementor Pro or any other page builder that allows you to create custom admin dashboards. This makes it easy to build white-label dashboards, while still reusing all those nice dashboard widgets :) Works perfectly with [Dashboard  Welcome for Elementor]()(https://wordpress.org/plugins/dashboard-welcome-for-elementor/) or [Dashboard Welcome for Beaver Builder][5]
 * **Dashboard Gutenberg / Dashboard Templates**: This Addon allows you to build a Dashboard with Gutenberg. You can create a new Dashboard under 'Dashboard Templates' and set a default template below. I will be extending this to allow different templates for different roles / groups. This release also includes a Gutenberg block for the shortcodes.
 * **Admin Toolbar**: This Addon allows you to tweak the admin toolbar and footer.
 * More to come ...
@@ -17,8 +18,6 @@ The integrated addons are used to centralise things I love & need when sending o
 ## Localization 
 * English (default)
 * German
-
-[A plugin from Alex @ portalZINE NMN - Development meets Creativity - portalzine.de][5]
 
 ## Feedback
 * I am open for your suggestions and feedback - Thank you for using or trying out one of my plugins!
@@ -53,7 +52,7 @@ I am still doing a big cleanup of my toolset and will see what I can actually sh
 
 [1]:	https://cubicfusion.com/wordpress/plugins/admin-enhancer/
 [2]:	https://wordpress.org/plugins/cubicfusion-admin-enhancer/
-[4]:	https://wordpress.org/plugins/dashboard-welcome-for-beaver-builder/
-[5]:	https://portalzine.de/
+[3]:	https://portalzine.de/
+[5]:	https://wordpress.org/plugins/dashboard-welcome-for-beaver-builder/
 [6]:	http://twitter.com/pztv
 [7]:	http://www.facebook.com/portalzine
