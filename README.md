@@ -6,7 +6,7 @@ Tested up to: 5.4.1
 Requires PHP: 7.0
 Stable tag: 0.2
 License: GPLv2 or later
-License URI: http://www.opensource.org/licenses/gpl-license.php
+License URI: http://www.opensource.org/licenses/gpl-license.php  
 
 This plugin adds useful admin features and resources to help you tweak the wordpress administration. 
 
