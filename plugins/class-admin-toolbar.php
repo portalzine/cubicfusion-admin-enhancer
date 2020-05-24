@@ -1,0 +1,230 @@
+<?php
+namespace CUBICFUSION\Plugins;
+
+if(!defined('ABSPATH')) { exit; }
+
+\CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_admin_toolbar', (object) array(
+    "name" 			=> "Admin Toolbar",
+    "short" 		=> "Module: Admin Toolbar & Footer",
+    "version" 		=> "0.1",
+	"updated"		=> "18.05.2020",
+    "description" 	=> __("<p>This Addon allows you to tweak the admin toolbar and footer.<br><br><br></p>", 'cubicfusion-admin-enhancer' ),
+	"external-links"=> array(),
+    "url" 			=> "",
+    "documentation" => "",
+	"style"			=> 1 //'.mo{color: red;}'
+));
+
+class Admin_Toolbar {
+	
+	
+	function init(){		
+
+		
+  		add_action('cmb2_admin_init', array($this,'register_my_admin_page'), 70);				
+		add_action('admin_enqueue_scripts', array($this, 'admin_assets'));	
+		add_action( 'cmb2_before_options-page_form_cf_plugins_admin_toolbar', 'CUBICFUSION\Core\GUI::cmb2_before_form', 10, 2 );
+		add_action( 'cmb2_after_options-page_form_cf_plugins_admin_toolbar', 'CUBICFUSION\Core\GUI::cmb2_after_form', 10, 2 );			
+		
+		$this->handleSettings();
+		
+	}
+	
+	public static
+	function get_instance() {
+
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+	
+	
+	function admin_assets( $hook ) {		
+		
+		wp_enqueue_style('cf-admin_toolbar-styles', plugin_dir_url( dirname(__FILE__) ).'assets/css/admin.toolbar.css');
+    	wp_enqueue_script( 'cf-admin_toolbar-script', plugin_dir_url( dirname(__FILE__) ).'assets/js/admin.toolbar.min.js', array(), '1.0' );
+			
+		add_action( 'wp_before_admin_bar_render',function(){
+			 global $wp_admin_bar;
+				add_option('cubicfusion_admin_toolbar_nodes', $wp_admin_bar->get_nodes());	
+		});		
+	}
+	
+	function register_my_admin_page() {
+  
+  		\CUBICFUSION\Core\Basics::admin_can_edit();
+		
+	    $secondary_options = new_cmb2_box( array(
+              'id'           => 'cf_plugins_admin_toolbar',
+              'title'        => esc_html__( 'Admin Toolbar', 'cmb2' ),
+			  'menu_title'	 =>  'Admin Toolbar',
+              'object_types' => array( 'options-page' ),
+              'option_key'   => 'cf_plugins_admin_toolbar',
+              'parent_slug'  => 'cf_plugins_shortcodes_options',
+          ) );
+      
+	    $secondary_options->add_field( array(
+            'name' => '<span class="dashicons dashicons-admin-settings"></span> '.__('Settings', 'cubicfusion-admin-enhancer'),          
+            'type' => 'title',
+            'id'   => 'general_title'
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => __('Always hide the toolbar on the frontend', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'toolbar_frontend_hide',
+            'type' => 'checkbox',
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => __('Hide WP Logo', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'toolbar_wplogo_hide',
+            'type' => 'checkbox',
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => __('Hide Help Tab everywhere', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'help_tab_hide',
+            'type' => 'checkbox',
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => __('Hide Screen Opitons everywhere', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'screen_options_hide',
+            'type' => 'checkbox',
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => '<span class="dashicons dashicons-admin-settings"></span> '.__('Footer Options', 'cubicfusion-admin-enhancer'),          
+            'type' => 'title',
+            'id'   => 'footer_options'
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => __('Hide footer text', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'footer_text_hide',
+            'type' => 'checkbox',
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => 'Change footer text. (Leftside of the footer)',            
+            'default' => '',
+            'id' => 'footer_text_change',
+            'type' => 'text'
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => __('Hide footer version', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'footer_version_hide',
+            'type' => 'checkbox',
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => 'Change version text (Rightside of the footer)',            
+            'default' => '',
+            'id' => 'footer_version_change',
+            'type' => 'text'
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => 'Add to footer div. (HTML allowed)',            
+            'default' => '',
+            'id' => 'footer_in_change',
+            'type' => 'textarea_code'
+        ) );
+		
+		$secondary_options->add_field( array(
+            'name' => '<span class="dashicons dashicons-admin-settings"></span> '.__('Hide Toolbar Options', 'cubicfusion-admin-enhancer'),          
+            'type' => 'title',
+            'id'   => 'general_options'
+        ) );
+		
+		$nodes = get_option("cubicfusion_admin_toolbar_nodes");
+	
+		foreach($nodes as $node){
+            
+		if(empty($node->parent) or in_array($node->id, array("my-account")) ){
+			
+			$secondary_options->add_field( array(
+              'name' => __("<a class='toolbar_node' title='".strip_tags($node->title)."'>".$node->id."</a>", 'cubicfusion-admin-enhancer' ),
+              //'desc' => 'field description (optional)',
+              'id'   =>  "admin_toolbar_node_".$node->id.'_disabled',
+              'type' => 'checkbox',
+          ) ); 
+         }		
+		}
+		
+	
+	}
+	
+	function handleSettings(){
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_frontend_hide' ) !== false ){
+			
+			add_action('after_setup_theme', function () {       
+              show_admin_bar(false);          
+            });
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_hide' ) !== false ){
+			
+          add_action( 'wp_before_admin_bar_render', 		function () {
+              global $wp_admin_bar;
+              $wp_admin_bar->remove_menu( 'wp-logo' );
+          }, 0 );
+		}
+		
+		add_action( 'wp_before_admin_bar_render',function(){
+			global $wp_admin_bar;
+			
+			$nodes = $wp_admin_bar->get_nodes();
+			
+			add_option('cubicfusion_admin_toolbar_nodes', $nodes );	
+			
+			foreach($nodes as $node){
+				if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', "admin_toolbar_node_".$node->id.'_disabled' ) !== false ){
+				 	$wp_admin_bar->remove_menu( $node->id );
+				}
+			}
+		});
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'help_tab_hide' ) !== false ){
+          add_filter('contextual_help_list',function (){
+              global $current_screen;
+              $current_screen->remove_help_tabs();
+          });
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'screen_options_hide' ) !== false ){
+          add_filter('screen_options_show_screen', '__return_false');
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_text_hide' ) !== false ){
+			add_filter( 'admin_footer_text', '__return_empty_string', 11 ); 
+		}
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_version_hide' ) !== false ){
+			add_filter( 'update_footer', '__return_empty_string', 11 );
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_text_change' ) !== false ){
+			add_filter( 'admin_footer_text', function(){
+				echo \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_text_change' ) ;
+			}, 11 ); 
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_version_change' ) !== false ){
+			add_filter( 'update_footer', function(){
+				echo \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_version_change' ) ;
+			}, 11 ); 
+		}
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_in_change' ) !== false ){
+			add_filter( 'in_admin_footer', function(){
+				echo \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'footer_in_change' ) ;
+			}, 12 ); 
+		}
+		
+	}
+	
+}

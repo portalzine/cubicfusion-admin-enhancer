@@ -1,0 +1,59 @@
+/*! 
+	cubicFUSION Admin Enhancer \ GUI
+	Alex @ portalZINE NMN
+	https://portalzine.de/cubicfusion
+
+*/
+.cf .changelog.hidden { display: none; }
+
+.cf .show_change { cursor: pointer; text-decoration: underline; }
+
+.cf.gui_clipboard { cursor: pointer; }
+
+.cf.gui_footer { position: fixed; bottom: 0; right: 0; padding: 20px 20px; background-color: #f1f1f1; }
+
+.cf.gui_header { display: inline-block; position: relative; }
+
+.cf.gui_header img { max-width: 100%; }
+
+.cf.gui_header .title { position: absolute; bottom: 45px; right: 135px; text-transform: uppercase; color: #6c6c6c; }
+
+.cf.gui_info { padding-left: 20px; padding-top: 20px; }
+
+.cf.gui_about { position: relative; padding-left: 30px; padding-top: 0px; padding-bottom: 30px; font-size: 15px; }
+
+.cf.gui_about img { max-width: 100px; vertical-align: middle; width: 100px; height: 100px; border-radius: 50%; margin: 20px 20px 20px 0px; float: left; border: 3px solid #18bc9c; /* border width   */ box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); transition: linear 0.25s; }
+
+.cf.gui_about p { font-size: 15px; }
+
+.cf.gui_about p a { color: #18bc9c; }
+
+.cf.gui_about .version { position: absolute; bottom: 0; right: 0; padding: 5px; }
+
+.cf.nav-tab-wrapper .nav-tab-active { background-color: #18bc9c !important; color: white; }
+
+.edit-post-fullscreen-mode-close.has-icon { background: white; }
+
+.edit-post-fullscreen-mode-close.has-icon svg { display: none !important; }
+
+.edit-post-fullscreen-mode-close.has-icon::before { content: ""; background: url(/wp-content/plugins/cubicfusion-admin-enhancer/assets/images/cube.png) no-repeat; height: 36px; width: 36px; background-size: contain; }
+
+.welcome-panel-close { display: none; }
+
+.cf-welcome-panel-close { position: absolute; top: 20px; right: 10px; padding: 10px 15px 10px 21px; line-height: 1.23076923; text-decoration: none; z-index: 4; }
+
+.cf-welcome-panel-close span { font-size: 35px !important; color: black; mix-blend-mode: multiply; }
+
+body[class*=cf-admin-enhancer_page] .cmb2-options-page > h2 { display: none !important; }
+
+body[class*=cf-admin-enhancer_page] .cmb-form { margin-bottom: 80px !important; }
+
+body[class*=cf_plugins_shortcodes] #submit-cmb, body[class*=cf_plugins_] #submit-cmb { background: #18bc9c !important; float: right; }
+
+body[class*=cf_plugins_shortcodes] .cmb-form, body[class*=cf_plugins_] .cmb-form { margin-bottom: 80px !important; }
+
+body[class*=cf_plugins_shortcodes] .cmb-row.cmb-type-title, body[class*=cf_plugins_] .cmb-row.cmb-type-title { background: #18bc9c !important; }
+
+body[class*=cf_plugins_shortcodes] .cmb-row.cmb-type-title h3, body[class*=cf_plugins_] .cmb-row.cmb-type-title h3 { color: white; font-size: 14px !important; }
+
+.toolbar_node { text-transform: uppercase; }
