@@ -30,7 +30,7 @@ The integrated addons are used to centralise things I love & need when sending o
 1. Upload the entire  folder to the `/wp-content/plugins/` directory -- or just upload the ZIP package via 'Plugins \> Add New \> Upload' in your WP Admin
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You will see a new option within the admin menu 'CF Admin Enhancer' :)
-4. Make sure to go to teh dashboard once after activation. This will cache all the latest dashboard widgets. (Will be adding a background refresher in an upcoming release)
+4. Make sure to go to the dashboard once after activation. This will cache all the latest dashboard widgets. (Will be adding a background refresher in an upcoming release)
 5. Now go, explore and enjoy :)
 
 ## Changelog
