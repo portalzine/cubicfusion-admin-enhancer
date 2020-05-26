@@ -55,7 +55,9 @@ class Shortcodes {
 				
 		$buffer = array();
 		foreach($wp_meta_boxes['dashboard']['normal']['core'] as $key => $widget){
-
+			if ( $widget['callback'] instanceof \Closure ){
+				continue;
+			}
 				add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
 			
 				$buffer[$key] = array('key' => $key,
@@ -72,7 +74,9 @@ class Shortcodes {
 		}
 		
 		foreach($wp_meta_boxes['dashboard']['side']['core'] as $key => $widget){
-
+			if ( $widget['callback'] instanceof \Closure ){
+				continue;
+			}
 				add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
 			
 				$buffer[$key] = array('key' => $key,
