@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_dashboard_gutenberg', (object) array(
     "name" 			=> "Shortcodes",
     "short" 		=> "Module: Dashboard Welcome Gutenberg",
-    "version" 		=> "0.1",
-	"updated"		=> "23.05.2020",
+    "version" 		=> "0.2",
+	"updated"		=> "07.11.2020",
     "description" 	=> __("<p>This Addon allows you to build a Dashboard with Gutenberg. You can create a new Dashboard under 'Dashboard Templates' and set a default template below. Will be extending this to allow different templates for different roles / groups. A Gutenberg block is included to integrate the current dashboard widgets and tweak them.</p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",
@@ -158,7 +158,9 @@ class Dashboard_Gutenberg {
 
         wp_register_script( 'cf-admin-widgets-local', plugins_url("../assets/js/admin.widgets.local.js", __FILE__) );
             $save = get_option( 'cubicfusion_cache_widgets' );
-                $short_codes[] = array("value" => "", "label" =>"Choose" ) ;
+ $translation_array = array();
+if(!empty($save)){             
+   $short_codes[] = array("value" => "", "label" =>"Choose" ) ;
                 foreach($save as $widget){
 
                     $short_codes[] = array("value" => $widget['key'], "label" =>strip_tags($widget['name']) ) ;
@@ -167,6 +169,7 @@ class Dashboard_Gutenberg {
         $translation_array = array(            
             'my_options' => $short_codes
         );
+}
         wp_localize_script( 'cf-admin-widgets-local', 'CF', $translation_array );
 
 		
@@ -339,7 +342,7 @@ class Dashboard_Gutenberg {
         );
 
         $templates= get_posts( $args );
-		
+		$options = [];
 		foreach($templates as $plate){
 			$options[$plate->ID] = $plate->post_title;
 		}		

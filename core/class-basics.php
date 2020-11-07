@@ -4,12 +4,6 @@ namespace CUBICFUSION\Core;
 
 if(!defined('ABSPATH')) { exit; }
 
-if ( file_exists( dirname( __FILE__ ) . '/inc/cmb2/init.php' ) ) {
-	require_once dirname( __FILE__ ) . '/inc/cmb2/init.php';
-} elseif ( file_exists( dirname( __FILE__ ) . '/inc/CMB2/init.php' ) ) {
-	require_once dirname( __FILE__ ) . '/inc/CMB2/init.php';
-}
-
 class Basics{
 	
 	

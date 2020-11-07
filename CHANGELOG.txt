@@ -1,5 +1,14 @@
 ## Changelog
 
+#### 0.2.3 - 07.11.2020 =
+Cleanup and reorganizing of the codebase
+
+#### 0.2.2 - 13.08.2020 =
+Some minor bug fixes and internal check for WordPress 5.5
+
+#### 0.2.1 - 26.05.2020
+Technical fix for dashboard widgets that use closures as a callback. This fix prevents the serialization of these callbacks. This is a PHP limitation that can be solved, but will wait and see how the demand for such a feature is. 
+
 #### 0.2 - 25.05.2020
 1. **Updated: Shortcodes** (0.2)  
 Cleanup & Copy to Clipboard added.

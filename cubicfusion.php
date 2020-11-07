@@ -3,7 +3,7 @@
 Plugin Name: cubicFUSION Admin Enhancer
 Plugin URI: https://portalzine.de/cubicfusion
 Description: Tools to enhance your WordPress Administration
-Version: 0.2
+Version: 0.2.3
 Author: portalZINE NMN
 Author URI: https://portalzine.de
 Text Domain: cubicfusion-admin-enhancer
@@ -23,6 +23,12 @@ define('CUBIC_PATH_ROOT', str_replace("//","/","/".str_replace($_SERVER['DOCUMEN
 define('CUBIC_URL', plugins_url()."/".basename(__DIR__)."/");
 
 require_once( trailingslashit( dirname( __FILE__ ) ) . 'lib/autoloader.php' );
+
+if ( file_exists( dirname( __FILE__ ) . '/inc/cmb2/init.php' ) ) {
+	require_once (trailingslashit( dirname( __FILE__ ) ) . 'inc/cmb2/init.php');
+} elseif ( file_exists( dirname( __FILE__ ) . '/inc/CMB2/init.php' ) ) {
+	require_once (trailingslashit( dirname( __FILE__ ) ) . 'inc/CMB2/init.php');
+}
 
 add_action( 'plugins_loaded', 'cubicfusion_admin_enhancer' );
 

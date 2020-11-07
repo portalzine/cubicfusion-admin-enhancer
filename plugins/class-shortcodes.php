@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_shortcodes_widgets', (object) array(
     "name" 			=> "Shortcodes",
     "short" 		=> "Module: Dashboard Widgets->Shortcodes",
-    "version" 		=> "0.2",
-	"updated"		=> "23.05.2020",
+    "version" 		=> "0.2.1",
+	"updated"		=> "26.05.2020",
     "description" 	=> __("<p>All dashboard widgets are converted to simple shortcodes. You can use those shortcodes within Elementor Pro or any other page builder that allows you to create custom admin dashboards.</p><p> Makes it easy to build white-label dashboards, while still reusing all those nice dashboard widgets :)</p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",
@@ -55,12 +55,14 @@ class Shortcodes {
 				
 		$buffer = array();
 		foreach($wp_meta_boxes['dashboard']['normal']['core'] as $key => $widget){
+			
 			if ( $widget['callback'] instanceof \Closure ){
 				continue;
 			}
-				add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
 			
-				$buffer[$key] = array('key' => $key,
+			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
+			
+			$buffer[$key] = array('key' => $key,
 								'name' 	=>  $widget['title'],
 								 'class' => 'normal',
 								  'callback' => $widget['callback']
@@ -74,20 +76,22 @@ class Shortcodes {
 		}
 		
 		foreach($wp_meta_boxes['dashboard']['side']['core'] as $key => $widget){
+			
 			if ( $widget['callback'] instanceof \Closure ){
 				continue;
 			}
-				add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
 			
-				$buffer[$key] = array('key' => $key,
+			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
+			
+			$buffer[$key] = array('key' => $key,
 								'name' 	=>  $widget['title'],
 								  'class' => 'side',
 								  'callback' => $widget['callback']
 							   
 							   );
-				if(cmb2_get_option( 'cf_plugins_shortcodes_widgets', $key.'_disabled' )){
-					remove_meta_box( $key , 'dashboard', 'side' );
-				}	
+			if(cmb2_get_option( 'cf_plugins_shortcodes_widgets', $key.'_disabled' )){
+				remove_meta_box( $key , 'dashboard', 'side' );
+			}	
 		}		
 	
 		add_option('cubicfusion_cache_widgets', $buffer);	

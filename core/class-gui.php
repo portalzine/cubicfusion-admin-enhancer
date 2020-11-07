@@ -1,9 +1,10 @@
 <?php
 namespace CUBICFUSION\Core;
 
-	require_once($_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/cubicfusion-admin-enhancer/inc/scssphp/scss.inc.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/cubicfusion-admin-enhancer/inc/markdown/Parsedown.php");
-	use \ScssPhp\ScssPhp\Compiler as SCSSCompiler;
+require_once(trailingslashit( dirname( __DIR__,1 ) )."inc/scssphp/scss.inc.php");
+require_once(trailingslashit( dirname( __DIR__,1 ) )."inc/markdown/Parsedown.php");
+
+use \ScssPhp\ScssPhp\Compiler as SCSSCompiler;
 
 
 if(!defined('ABSPATH')) { exit; }
@@ -35,7 +36,7 @@ class GUI{
 		
 		$Parsedown = new \Parsedown();
 		
-		$file = esc_html(file_get_contents($_SERVER['DOCUMENT_ROOT']."/wp-content/plugins/cubicfusion-admin-enhancer/".$file) ) ;
+		$file = esc_html(file_get_contents(trailingslashit( dirname( __DIR__, 1) ).$file) ) ;
 		 
 		return $Parsedown->text($file);
 	}
