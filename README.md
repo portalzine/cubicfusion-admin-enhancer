@@ -34,6 +34,10 @@ The integrated addons are used to centralise things I love & need when sending o
 5. Now go, explore and enjoy :)
 
 ## Changelog
+
+### 0.2.3 - 07.11.2020 
+Cleanup and reorganizing of the codebase
+
 ### 0.2 - 23.05.2020
 1. **Updated: Shortcodes** (0.2) - Cleanup & Copy to Clipboard added.
 2. **New: Dashboard Gutenberg / Dashboard Templates** (0.1) - This Addon allows you to build a Dashboard with Gutenberg. You can create a new Dashboard under 'Dashboard Templates' and set a default template below. I will be extending this to allow different templates for different roles / groups. This release also includes a Gutenberg block for the shortcodes.
@@ -46,7 +50,7 @@ The integrated addons are used to centralise things I love & need when sending o
 ## Upgrade Notice
 
 ## Additional Info
-**Idea Behind / Philosophy:**   
+**Idea Behind / Philosophy:**  
 
 **cubicFUSION** is my personal playground. I planned to make many of my projects public, but time is limited and running customer projects always a priority.  
 
