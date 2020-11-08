@@ -25,10 +25,22 @@ class Admin_Toolbar {
 		add_action('admin_enqueue_scripts', array($this, 'admin_assets'));	
 		add_action( 'cmb2_before_options-page_form_cf_plugins_admin_toolbar', 'CUBICFUSION\Core\GUI::cmb2_before_form', 10, 2 );
 		add_action( 'cmb2_after_options-page_form_cf_plugins_admin_toolbar', 'CUBICFUSION\Core\GUI::cmb2_after_form', 10, 2 );			
-		
+		add_action('admin_init', array($this, 'additional_admin_color_schemes' ));
 		$this->handleSettings();
 		
 	}
+	// Cleanup and move & make editable
+	function additional_admin_color_schemes() {
+        //Get the theme directory
+        $theme_dir = plugin_dir_url( dirname(__FILE__) ).'assets/css';
+
+        //Ocean
+        wp_admin_css_color( 'cubicfusion', __( 'cubicFUSION' ),
+          $theme_dir . '/admin-colors/cubicfusion.css',
+          array( '#222', '#333', '#18bc9c', '#00a0d2' )
+        );
+      }
+
 	
 	public static
 	function get_instance() {
@@ -45,7 +57,51 @@ class Admin_Toolbar {
 		
 		wp_enqueue_style('cf-admin_toolbar-styles', plugin_dir_url( dirname(__FILE__) ).'assets/css/admin.toolbar.css');
     	wp_enqueue_script( 'cf-admin_toolbar-script', plugin_dir_url( dirname(__FILE__) ).'assets/js/admin.toolbar.min.js', array(), '1.0' );
-			
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own' ) !== false ){
+			add_action('admin_head', function () {
+            	$size = explode("_",\CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_size' ));
+				
+				if($height = \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_height' )){
+					$size[1] = $height;
+				}
+				echo '<style>
+                      #wpadminbar{
+                          left: '.$size[0].'px;
+						  width: calc(100% - '.$size[0].'px);
+                      }
+
+                      #adminmenuwrap{
+                          top: '.($size[1]).'px;
+                      }
+
+                      #adminmenuback::before{
+                          content:"';
+						  if($text = \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_text' )){
+							  echo $text;
+						  }
+						 
+				echo'";'; 
+				 if($text = \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_text' )){
+							  echo "line-height:".$size[1].'px;';
+					  
+						  }
+				echo ' text-align: center;
+                          position: absolute;
+						  color:'. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_txtcolor' ).';
+                          top:0;
+                          left:0;
+						  font-weight: 600;
+						  width: '.$size[0].'px;
+                          height:'.$size[1].'px;
+                        
+                          background: '. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_bgcolor' ).';
+                      }
+              </style>';
+            });
+
+		}
+		
 		add_action( 'wp_before_admin_bar_render',function(){
 			 global $wp_admin_bar;
 				add_option('cubicfusion_admin_toolbar_nodes', $wp_admin_bar->get_nodes());	
@@ -78,12 +134,6 @@ class Admin_Toolbar {
         ) );
 		
 		$secondary_options->add_field( array(
-            'name' => __('Hide WP Logo', 'cubicfusion-admin-enhancer' ),             
-            'id'   =>  'toolbar_wplogo_hide',
-            'type' => 'checkbox',
-        ) );
-		
-		$secondary_options->add_field( array(
             'name' => __('Hide Help Tab everywhere', 'cubicfusion-admin-enhancer' ),             
             'id'   =>  'help_tab_hide',
             'type' => 'checkbox',
@@ -94,6 +144,79 @@ class Admin_Toolbar {
             'id'   =>  'screen_options_hide',
             'type' => 'checkbox',
         ) );
+		
+		
+			    $secondary_options->add_field( array(
+            'name' => '<span class="dashicons dashicons-admin-settings"></span> '.__('WP Logo Replacement', 'cubicfusion-admin-enhancer'),          
+            'type' => 'title',
+            'id'   => 'logo_title'
+        ) );
+		
+		
+		$secondary_options->add_field( array(
+            'name' => __('Hide', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'toolbar_wplogo_hide',
+            'type' => 'checkbox',
+        ) );
+		
+			$secondary_options->add_field( array(
+            'name' => __('Add your own Logo', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'toolbar_wplogo_add_your_own',
+            'type' => 'checkbox',
+        ) );
+		
+		$secondary_options->add_field( array(
+          'name'             => __('Logo Size', 'cubicfusion-admin-enhancer' ),     
+          'id'               => 'toolbar_wplogo_add_your_own_size',
+          'type'             => 'radio',
+          'show_option_none' => false,
+          'options'          => array(
+              '32_32' => __( '16x32', 'cmb2' ),
+              '160_32'   => __( '160x32', 'cmb2' ),
+              '160_60'     => __( '160x60', 'cmb2' ),
+              '160_160'     => __( '160x160', 'cmb2' ),
+          ),
+      ) );
+		
+			$secondary_options->add_field( array(
+            'name' => 'Custom Height',            
+            'default' => '',
+            'id' => 'toolbar_wplogo_add_your_own_height',
+            'type' => 'text'
+        ) );
+		
+		$secondary_options->add_field( array(
+          'name'    => 'BG Color',
+          'id'      => 'toolbar_wplogo_add_your_own_bgcolor',
+          'type'    => 'colorpicker',
+          'default' => '#18bc9c',
+          // 'options' => array(
+          // 	'alpha' => true, // Make this a rgba color picker.
+          // ),
+      ) );
+		$secondary_options->add_field( array(
+            'name' => 'Image',            
+            'default' => '',
+            'id' => 'toolbar_wplogo_add_your_own_img',
+            'type' => 'file',
+			'preview_size' => 'medium',
+        ) );
+		$secondary_options->add_field( array(
+            'name' => __('Pure Text', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'toolbar_wplogo_add_your_own_text',
+            'type' => 'text',
+        ) );
+		
+		$secondary_options->add_field( array(
+          'name'    => 'Text Color',
+          'id'      => 'toolbar_wplogo_add_your_own_txtcolor',
+          'type'    => 'colorpicker',
+          'default' => '#ffffff',
+          // 'options' => array(
+          // 	'alpha' => true, // Make this a rgba color picker.
+          // ),
+      ) );
+		
 		
 			$secondary_options->add_field( array(
             'name' => '<span class="dashicons dashicons-admin-settings"></span> '.__('Footer Options', 'cubicfusion-admin-enhancer'),          
@@ -175,6 +298,8 @@ class Admin_Toolbar {
           }, 0 );
 		}
 		
+	
+		
 		add_action( 'wp_before_admin_bar_render',function(){
 			global $wp_admin_bar;
 			
@@ -183,7 +308,7 @@ class Admin_Toolbar {
 			add_option('cubicfusion_admin_toolbar_nodes', $nodes );	
 			
 			foreach($nodes as $node){
-				if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', "admin_toolbar_node_".$node->id.'_disabled' ) !== false ){
+				if( !empty(\CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', "admin_toolbar_node_".$node->id.'_disabled' ) ) && \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', "admin_toolbar_node_".$node->id.'_disabled' ) !== false ){
 				 	$wp_admin_bar->remove_menu( $node->id );
 				}
 			}

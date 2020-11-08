@@ -4,6 +4,7 @@
 	https://portalzine.de/cubicfusion
 
 */
+.toplevel_page_cf_plugins_shortcodes_options h2{display: none;}
 .cf .changelog.hidden { display: none; }
 
 .cf .show_change { cursor: pointer; text-decoration: underline; }

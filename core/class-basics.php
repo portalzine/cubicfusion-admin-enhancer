@@ -4,6 +4,8 @@ namespace CUBICFUSION\Core;
 
 if(!defined('ABSPATH')) { exit; }
 
+use \Opis\Closure\SerializableClosure;
+
 class Basics{
 	
 	
@@ -21,6 +23,21 @@ class Basics{
 		load_plugin_textdomain( 'cubicfusion-admin-widgets', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		
 		$this->traitInit();	
+	}
+	
+	public 
+	function is_closure($t) {
+    	return $t instanceof \Closure;
+	}
+	
+	function prepSerializeClosure( $factorial ){
+						
+     	if(self::is_closure($factorial) ){			
+        	$factorial = new \Opis\Closure\SerializableClosure($factorial);
+		}
+       
+        return $factorial;
+		
 	}
 	
 	function get_editable_roles() {

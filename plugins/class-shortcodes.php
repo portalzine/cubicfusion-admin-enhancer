@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_shortcodes_widgets', (object) array(
     "name" 			=> "Shortcodes",
     "short" 		=> "Module: Dashboard Widgets->Shortcodes",
-    "version" 		=> "0.2.1",
-	"updated"		=> "26.05.2020",
+    "version" 		=> "0.2.5",
+	"updated"		=> "09.11.2020",
     "description" 	=> __("<p>All dashboard widgets are converted to simple shortcodes. You can use those shortcodes within Elementor Pro or any other page builder that allows you to create custom admin dashboards.</p><p> Makes it easy to build white-label dashboards, while still reusing all those nice dashboard widgets :)</p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",
@@ -57,7 +57,7 @@ class Shortcodes {
 		foreach($wp_meta_boxes['dashboard']['normal']['core'] as $key => $widget){
 			
 			if ( $widget['callback'] instanceof \Closure ){
-				continue;
+				$callback = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);
 			}
 			
 			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
@@ -78,7 +78,7 @@ class Shortcodes {
 		foreach($wp_meta_boxes['dashboard']['side']['core'] as $key => $widget){
 			
 			if ( $widget['callback'] instanceof \Closure ){
-				continue;
+				$callback = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);	
 			}
 			
 			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
@@ -124,34 +124,36 @@ class Shortcodes {
         ) );
 		
 		$save = get_option( 'cubicfusion_cache_widgets' );
-        
-		foreach($save as $widget){
-            
-			$secondary_options->add_field( array(
-              'name' => '<span class="dashicons dashicons-welcome-widgets-menus"></span> '.$widget['name'],
-              //'desc' => 'This is a title description',
-              'type' => 'title',
-              'id'   => $widget['name'].'_title'
-                ) );
-			
-			$secondary_options->add_field( array(
-            'name'    => __('Shortcode', 'cubicfusion-admin-enhancer' ),
-            //'desc'    => 'field description (optional)',
-            'default' => "[dashboard_widget_".$widget['key']."]",
-            'id'      => $widget['key'],
-            'type'    => 'text',
-			'attributes' => array(
-				'readonly' => 'readonly'),
-			'after' => array($this,  'send_to_clipboard'),
-      		) );
-			
-			$secondary_options->add_field( array(
-              'name' => __('Deactivate Widget', 'cubicfusion-admin-enhancer' ),
-              //'desc' => 'field description (optional)',
-              'id'   =>  $widget['key'].'_disabled',
-              'type' => 'checkbox',
-          ) );
-         }		
+		
+        if(!empty($save) ) {
+          foreach($save as $widget){
+
+              $secondary_options->add_field( array(
+                'name' => '<span class="dashicons dashicons-welcome-widgets-menus"></span> '.$widget['name'],
+                //'desc' => 'This is a title description',
+                'type' => 'title',
+                'id'   => $widget['name'].'_title'
+                  ) );
+
+              $secondary_options->add_field( array(
+              'name'    => __('Shortcode', 'cubicfusion-admin-enhancer' ),
+              //'desc'    => 'field description (optional)',
+              'default' => "[dashboard_widget_".$widget['key']."]",
+              'id'      => $widget['key'],
+              'type'    => 'text',
+              'attributes' => array(
+                  'readonly' => 'readonly'),
+              'after' => array($this,  'send_to_clipboard'),
+              ) );
+
+              $secondary_options->add_field( array(
+                'name' => __('Deactivate Widget', 'cubicfusion-admin-enhancer' ),
+                //'desc' => 'field description (optional)',
+                'id'   =>  $widget['key'].'_disabled',
+                'type' => 'checkbox',
+            ) );
+           }
+		}
 	}
 	
 	function send_to_clipboard(){

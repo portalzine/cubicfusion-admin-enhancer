@@ -157,20 +157,22 @@ class Dashboard_Gutenberg {
 
 
         wp_register_script( 'cf-admin-widgets-local', plugins_url("../assets/js/admin.widgets.local.js", __FILE__) );
-            $save = get_option( 'cubicfusion_cache_widgets' );
- $translation_array = array();
-if(!empty($save)){             
-   $short_codes[] = array("value" => "", "label" =>"Choose" ) ;
-                foreach($save as $widget){
+        $save = get_option( 'cubicfusion_cache_widgets' );
+ 		$translation_array = array();
+        
+		if(!empty($save)){             
+           $short_codes[] = array("value" => "", "label" =>"Choose" ) ;
+           
+			foreach($save as $widget){
+                $short_codes[] = array("value" => $widget['key'], "label" =>strip_tags($widget['name']) ) ;
+            }
 
-                    $short_codes[] = array("value" => $widget['key'], "label" =>strip_tags($widget['name']) ) ;
-                }
-
-        $translation_array = array(            
-            'my_options' => $short_codes
-        );
-}
-        wp_localize_script( 'cf-admin-widgets-local', 'CF', $translation_array );
+            $translation_array = array(            
+                'my_options' => $short_codes
+            );
+        }
+        
+		wp_localize_script( 'cf-admin-widgets-local', 'CF', $translation_array );
 
 		
         wp_enqueue_script( 'cf-admin-widgets-local' );
@@ -342,7 +344,9 @@ if(!empty($save)){
         );
 
         $templates= get_posts( $args );
+		
 		$options = [];
+		
 		foreach($templates as $plate){
 			$options[$plate->ID] = $plate->post_title;
 		}		

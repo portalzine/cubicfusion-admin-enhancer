@@ -35,6 +35,11 @@ The integrated addons are used to centralise things I love & need when sending o
 
 ## Changelog
 
+###  0.2.5 - 09.11.2020 
+Allow dashboard widgets with a Closure. Added Opis Closure which allows to serialize closures. 
+This makes sure that dashboard widgets, like those from Rank Math work.
+
+
 ### 0.2.3 - 07.11.2020 
 Cleanup and reorganizing of the codebase
 
