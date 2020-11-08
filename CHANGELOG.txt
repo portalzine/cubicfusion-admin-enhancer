@@ -1,8 +1,15 @@
 ## Changelog
 
 #### 0.2.5 - 09.11.2020
-Allow dashboard widgets with a Closure. Added Opis Closure which allows to serialize closures. 
-This makes sure that dashboard widgets, like those from Rank Math work.
+1. **Updated: Shortcodes** (0.2.5)  
+Allow dashboard widgets with a Closure. Added Opis Closure which allows to serialize closures. This makes sure that dashboard widgets, like those from Rank Math work.
+
+2. **Updated: Admin Toolbar** (0.2)  
+Add your own logo. (32x32, 32x160, 160x60, 160x160, custom height)
+Set logo background - color.
+Set logo image.
+Use pure text logo.
+Set text logo color
 
 #### 0.2.3 - 07.11.2020
 Cleanup and reorganizing of the codebase
