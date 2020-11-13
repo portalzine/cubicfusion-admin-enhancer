@@ -55,9 +55,11 @@ class Shortcodes {
 				
 		$buffer = array();
 		foreach($wp_meta_boxes['dashboard']['normal']['core'] as $key => $widget){
-			
+			$closure = false;
 			if ( $widget['callback'] instanceof \Closure ){
-				$callback = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);
+				continue;
+				//$widget['callback'] = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);
+				//$closure = true;
 			}
 			
 			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
@@ -65,7 +67,8 @@ class Shortcodes {
 			$buffer[$key] = array('key' => $key,
 								'name' 	=>  $widget['title'],
 								 'class' => 'normal',
-								  'callback' => $widget['callback']
+								  'callback' => $widget['callback'],
+								  'closure' => $closure 
 							   );
 			
 			if(cmb2_get_option( 'cf_plugins_shortcodes_widgets', $key.'_disabled' )){
@@ -78,7 +81,9 @@ class Shortcodes {
 		foreach($wp_meta_boxes['dashboard']['side']['core'] as $key => $widget){
 			
 			if ( $widget['callback'] instanceof \Closure ){
-				$callback = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);	
+				continue;
+				//$widget['callback'] = \CUBICFUSION\Core\Basics::prepSerializeClosure($widget['callback']);	
+				//$closure = true;
 			}
 			
 			add_shortcode( 'dashboard_widget_'.$key , $widget['callback'] );
@@ -86,7 +91,8 @@ class Shortcodes {
 			$buffer[$key] = array('key' => $key,
 								'name' 	=>  $widget['title'],
 								  'class' => 'side',
-								  'callback' => $widget['callback']
+								  'callback' => $widget['callback'],
+								   'closure' => $closure 
 							   
 							   );
 			if(cmb2_get_option( 'cf_plugins_shortcodes_widgets', $key.'_disabled' )){
