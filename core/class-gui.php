@@ -33,7 +33,7 @@ class GUI{
 		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_shortcodes_options', 'reset_options' )){		
 			define('WP_UNINSTALL_PLUGIN', 1);
 			require_once(trailingslashit( dirname( __DIR__,1 ) )."uninstall.php");
-			header('Location: '.$_SERVER['REQUEST_URI']);
+			
 		}
 		
 	}
