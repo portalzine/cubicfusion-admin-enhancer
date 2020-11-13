@@ -72,7 +72,7 @@ class Admin_Toolbar {
                       }
 
                       #adminmenuwrap{
-                          top: '.($size[1]).'px;
+                         margin-top: '.($size[1] / 2).'px!important;
                       }
 
                       #adminmenuback::before{
@@ -87,15 +87,19 @@ class Admin_Toolbar {
 					  
 						  }
 				echo ' text-align: center;
-                          position: absolute;
+                          position: fixed;
 						  color:'. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_txtcolor' ).';
                           top:0;
                           left:0;
 						  font-weight: 600;
 						  width: '.$size[0].'px;
-                          height:'.$size[1].'px;
-                        
-                          background: '. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_bgcolor' ).';
+                          height:'.$size[1].'px;                        
+                          background-color: '. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_bgcolor' ).';';
+				 if($text = \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_img' )){
+				echo'	  background-image: url('. \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_admin_toolbar', 'toolbar_wplogo_add_your_own_img' ).');
+						  background-size: contain;';
+				 }
+				echo'
                       }
               </style>';
             });

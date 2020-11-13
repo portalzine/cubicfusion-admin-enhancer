@@ -25,11 +25,12 @@ class Basics{
 		$this->traitInit();	
 	}
 	
-	public 
+	static public  
 	function is_closure($t) {
     	return $t instanceof \Closure;
 	}
 	
+	static public 
 	function prepSerializeClosure( $factorial ){
 						
      	if(self::is_closure($factorial) ){			
@@ -40,6 +41,7 @@ class Basics{
 		
 	}
 	
+	static public 
 	function get_editable_roles() {
 		global $wp_roles;
 

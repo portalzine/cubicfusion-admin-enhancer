@@ -29,6 +29,13 @@ class GUI{
 		add_action('admin_enqueue_scripts', array($this, 'admin_assets'));	
 		add_action('admin_head', array($this, 'customCSS'));
 		
+		
+		if( \CUBICFUSION\Core\Basics::cmb2_get_option( 'cf_plugins_shortcodes_options', 'reset_options' )){		
+			define('WP_UNINSTALL_PLUGIN', 1);
+			require_once(trailingslashit( dirname( __DIR__,1 ) )."uninstall.php");
+			header('Location: '.$_SERVER['REQUEST_URI']);
+		}
+		
 	}
 	
 	static
@@ -207,6 +214,12 @@ class GUI{
           'option_key'   => 'cf_plugins_shortcodes_options', 
 		  'icon_url' 	 => 'dashicons-admin-customizer',
 			
+        ) );
+		
+		$cmb_options->add_field( array(
+            'name' => __('Reset Options', 'cubicfusion-admin-enhancer' ),             
+            'id'   =>  'reset_options',
+            'type' => 'checkbox',
         ) );
 	}
 }

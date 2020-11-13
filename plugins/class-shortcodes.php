@@ -94,7 +94,7 @@ class Shortcodes {
 			}	
 		}		
 	
-		add_option('cubicfusion_cache_widgets', $buffer);	
+		add_option('cf_plugins_shortcodes_cache_widgets', $buffer);	
 		
 	}
 	
@@ -123,7 +123,7 @@ class Shortcodes {
             'type' => 'checkbox',
         ) );
 		
-		$save = get_option( 'cubicfusion_cache_widgets' );
+		$save = get_option( 'cf_plugins_shortcodes_cache_widgets' );
 		
         if(!empty($save) ) {
           foreach($save as $widget){

@@ -4,7 +4,7 @@ Tags: admin, adminbar, admin menu, dashboard, tweaks, white label, templates, sh
 Requires at least: 5.0
 Tested up to: 5.5.3
 Requires PHP: 7.0
-Stable tag: 0.2.5
+Stable tag: 0.2.5.1
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -48,6 +48,9 @@ Welcome for Elementor](https://wordpress.org/plugins/dashboard-welcome-for-eleme
 5. Now go, explore and enjoy :)
 
 == Changelog ==
+
+= 0.2.5.2 - 13.11.2020 =
+Small tweaks to all modules.
 
 = 0.2.5 - 09.11.2020 =
 Allow dashboard widgets with a Closure. Added Opis Closure which allows to serialize closures. 

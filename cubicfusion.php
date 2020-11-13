@@ -3,7 +3,7 @@
 Plugin Name: cubicFUSION Admin Enhancer
 Plugin URI: https://portalzine.de/cubicfusion
 Description: Tools to enhance your WordPress Administration
-Version: 0.2.5
+Version: 0.2.5.2
 Author: portalZINE NMN
 Author URI: https://portalzine.de
 Text Domain: cubicfusion-admin-enhancer

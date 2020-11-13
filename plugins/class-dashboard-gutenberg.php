@@ -157,7 +157,7 @@ class Dashboard_Gutenberg {
 
 
         wp_register_script( 'cf-admin-widgets-local', plugins_url("../assets/js/admin.widgets.local.js", __FILE__) );
-        $save = get_option( 'cubicfusion_cache_widgets' );
+        $save = get_option( 'cf_plugins_shortcodes_cache_widgets' );
  		$translation_array = array();
         
 		if(!empty($save)){             
@@ -209,7 +209,7 @@ class Dashboard_Gutenberg {
 			return "Choose Widget!";
 		}
 	
-		$widgets = get_option( 'cubicfusion_cache_widgets' );
+		$widgets = get_option( 'cf_plugins_shortcodes_cache_widgets' );
 		
 		ob_start();
 			if (is_callable($widgets[$atts['shortcode']]['callback'])) {
