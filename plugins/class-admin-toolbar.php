@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_admin_toolbar', (object) array(
     "name" 			=> "Admin Toolbar",
     "short" 		=> "Module: Admin Toolbar & Footer",
-    "version" 		=> "0.1",
-	"updated"		=> "18.05.2020",
+    "version" 		=> "0.2",
+	"updated"		=> "30.07.2021",
     "description" 	=> __("<p>This Addon allows you to tweak the admin toolbar and footer.<br><br><br></p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",
@@ -268,18 +268,21 @@ class Admin_Toolbar {
         ) );
 		
 		$nodes = get_option("cubicfusion_admin_toolbar_nodes");
-	
-		foreach($nodes as $node){
+		
+		if(!empty($nodes)){
+		
+			foreach($nodes as $node){
             
-		if(empty($node->parent) or in_array($node->id, array("my-account")) ){
-			
-			$secondary_options->add_field( array(
-              'name' => __("<a class='toolbar_node' title='".strip_tags($node->title)."'>".$node->id."</a>", 'cubicfusion-admin-enhancer' ),
-              //'desc' => 'field description (optional)',
-              'id'   =>  "admin_toolbar_node_".$node->id.'_disabled',
-              'type' => 'checkbox',
-          ) ); 
-         }		
+                if(empty($node->parent) or in_array($node->id, array("my-account")) ){
+
+                    $secondary_options->add_field( array(
+                      'name' => __("<a class='toolbar_node' title='".strip_tags($node->title)."'>".$node->id."</a>", 'cubicfusion-admin-enhancer' ),
+                      //'desc' => 'field description (optional)',
+                      'id'   =>  "admin_toolbar_node_".$node->id.'_disabled',
+                      'type' => 'checkbox',
+                  ) ); 
+                 }		
+          }
 		}
 		
 	
