@@ -2,9 +2,9 @@
 Contributors: portalzine
 Tags: admin, adminbar, admin menu, dashboard, tweaks, white label, templates, shortcodes, branding, custom, administration, plugin, login, client, navigation, appearance,  widgets, customizer
 Requires at least: 5.0
-Tested up to: 5.5.3
+Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 0.2.5.1
+Stable tag: 0.2.6
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -48,6 +48,10 @@ Welcome for Elementor](https://wordpress.org/plugins/dashboard-welcome-for-eleme
 5. Now go, explore and enjoy :)
 
 == Changelog ==
+
+= 0.2.6 - 30.07.2021 =
+Dashboard Gutenberg Fix for WP 5.8
+Admin Toolbar cleanup
 
 = 0.2.5.2 - 13.11.2020 =
 Small tweaks to all modules.
