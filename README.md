@@ -35,6 +35,10 @@ The integrated addons are used to centralise things I love & need when sending o
 
 ## Changelog
 
+###  0.2.6.1 - 25.01.2022 
+Check for WordPress 5.9
+CMB2 update
+
 ###  0.2.6 - 30.07.2021 
 Dashboard Gutenberg Fix for WP 5.8
 Admin Toolbar cleanup
