@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_admin_toolbar', (object) array(
     "name" 			=> "Admin Toolbar",
     "short" 		=> "Module: Admin Toolbar & Footer",
-    "version" 		=> "0.2",
-	"updated"		=> "30.07.2021",
+    "version" 		=> "0.2.1",
+	"updated"		=> "25.01.2022",
     "description" 	=> __("<p>This Addon allows you to tweak the admin toolbar and footer.<br><br><br></p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",

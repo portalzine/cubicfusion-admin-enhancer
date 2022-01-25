@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_shortcodes_widgets', (object) array(
     "name" 			=> "Shortcodes",
     "short" 		=> "Module: Dashboard Widgets->Shortcodes",
-    "version" 		=> "0.2.5",
-	"updated"		=> "09.11.2020",
+    "version" 		=> "0.2.6.1",
+	"updated"		=> "25.01.2022",
     "description" 	=> __("<p>All dashboard widgets are converted to simple shortcodes. You can use those shortcodes within Elementor Pro or any other page builder that allows you to create custom admin dashboards.</p><p> Makes it easy to build white-label dashboards, while still reusing all those nice dashboard widgets :)</p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",

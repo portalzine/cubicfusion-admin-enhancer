@@ -12,8 +12,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_shortcodes_options', (object) array(
     "name" 			=> "Main",
     "short" 		=> "Core",
-    "version" 		=> "0.2.5",
-	"updated"		=> "09.11.2020",
+    "version" 		=> "0.2.6.1",
+	"updated"		=> "25.01.2022",
     "description" 	=> __("<p><strong>Admin Enhancer</strong> is a work in progress.</p><p>I am using this WordPress plugin to centralise things I love & need, when sending out a finished website or project.</p><p>These tools are completely free and will always stay free. Check the <strong class='show_change'>Changelog</strong> for the latest changes. </p>", 'cubicfusion-admin-enhancer' ),
     "url" 			=> "",
     "documentation" => "",

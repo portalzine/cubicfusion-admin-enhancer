@@ -6,8 +6,8 @@ if(!defined('ABSPATH')) { exit; }
 \CUBICFUSION\Core\CUBIC_HOOKS::set('MODULE', 'cf_plugins_dashboard_gutenberg', (object) array(
     "name" 			=> "Shortcodes",
     "short" 		=> "Module: Dashboard Welcome Gutenberg",
-    "version" 		=> "0.3",
-	"updated"		=> "30.07.2021",
+    "version" 		=> "0.3.1",
+	"updated"		=> "25.01.2022",
     "description" 	=> __("<p>This Addon allows you to build a Dashboard with Gutenberg. You can create a new Dashboard under 'Dashboard Templates' and set a default template below. Will be extending this to allow different templates for different roles / groups. A Gutenberg block is included to integrate the current dashboard widgets and tweak them.</p>", 'cubicfusion-admin-enhancer' ),
 	"external-links"=> array(),
     "url" 			=> "",
