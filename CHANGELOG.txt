@@ -1,8 +1,9 @@
 ## Changelog
 
-###  0.2.6.1 - 25.01.2022 
-Check for WordPress 5.9
-CMB2 update
+
+###  0.2.6.2 - 23.04.2024 
+Check for WordPress 6.5.2
+Changes coming ...
 
 ####  0.2.6 - 30.07.2021 
 Dashboard Gutenberg Fix for WP 5.8
